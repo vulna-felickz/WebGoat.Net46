@@ -85,3 +85,8 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+
+    # assuming matrix.language == "csharp" or the like
+    - run: |
+        codeql database export-diagnostics --format raw ${{runner.temp}}/codeql_databases/${{matrix.language}}
+        
